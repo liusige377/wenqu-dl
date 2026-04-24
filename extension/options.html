@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+      background: #0f0f1a;
+      color: #e0e0e0;
+      padding: 24px;
+      max-width: 600px;
+    }
+    h1 { font-size: 20px; color: #4f8cff; margin-bottom: 20px; }
+    h2 { font-size: 14px; color: #999; margin: 16px 0 8px; }
+    .setting-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #222;
+    }
+    .setting-row label { font-size: 13px; }
+    .setting-row input, .setting-row select {
+      padding: 6px 10px;
+      background: #1a1a2e;
+      border: 1px solid #333;
+      border-radius: 6px;
+      color: #e0e0e0;
+      font-size: 13px;
+    }
+    .toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      background: #333;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .toggle.active { background: #4f8cff; }
+    .toggle::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 18px; height: 18px;
+      background: white;
+      border-radius: 50%;
+      transition: left 0.2s;
+    }
+    .toggle.active::after { left: 23px; }
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      background: #4f8cff;
+      color: white;
+      margin-top: 20px;
+    }
+    .btn:hover { background: #6fa0ff; }
+  </style>
+</head>
+<body>
+  <h1>🦞 问渠下载器 - 扩展设置</h1>
+
+  <h2>下载拦截</h2>
+  <div class="setting-row">
+    <label>自动拦截下载链接</label>
+    <div class="toggle active" id="toggleIntercept" onclick="toggleSetting(this, 'intercept')"></div>
+  </div>
+  <div class="setting-row">
+    <label>拦截浏览器原生下载</label>
+    <div class="toggle active" id="toggleBrowserDownload" onclick="toggleSetting(this, 'browserDownload')"></div>
+  </div>
+  <div class="setting-row">
+    <label>视频嗅探</label>
+    <div class="toggle active" id="toggleVideoSniff" onclick="toggleSetting(this, 'videoSniff')"></div>
+  </div>
+  <div class="setting-row">
+    <label>fetch/XHR Hook</label>
+    <div class="toggle active" id="toggleFetchHook" onclick="toggleSetting(this, 'fetchHook')"></div>
+  </div>
+
+  <h2>文件类型</h2>
+  <div class="setting-row">
+    <label>拦截的最小文件大小</label>
+    <select id="minFileSize">
+      <option value="0">不限</option>
+      <option value="1048576" selected>1MB</option>
+      <option value="10485760">10MB</option>
+      <option value="104857600">100MB</option>
+    </select>
+  </div>
+
+  <h2>排除列表</h2>
+  <div class="setting-row">
+    <label>不拦截的域名（每行一个）</label>
+  </div>
+  <textarea id="excludeDomains" style="width:100%;height:80px;background:#1a1a2e;border:1px solid #333;border-radius:6px;color:#e0e0e0;padding:8px;font-size:12px;margin-top:4px" placeholder="例：google.com&#10;github.com"></textarea>
+
+  <button class="btn" onclick="saveSettings()">保存设置</button>
+
+  <script>
+    // 加载设置
+    chrome.storage.local.get('wenquSettings', (data) => {
+      const settings = data.wenquSettings || {};
+      ['intercept', 'browserDownload', 'videoSniff', 'fetchHook'].forEach(key => {
+        const el = document.getElementById('toggle' + key.charAt(0).toUpperCase() + key.slice(1));
+        if (el && settings[key] === false) el.classList.remove('active');
+      });
+      if (settings.minFileSize) document.getElementById('minFileSize').value = settings.minFileSize;
+      if (settings.excludeDomains) document.getElementById('excludeDomains').value = settings.excludeDomains;
+    });
+
+    function toggleSetting(el, key) {
+      el.classList.toggle('active');
+    }
+
+    function saveSettings() {
+      const settings = {
+        intercept: document.getElementById('toggleIntercept').classList.contains('active'),
+        browserDownload: document.getElementById('toggleBrowserDownload').classList.contains('active'),
+        videoSniff: document.getElementById('toggleVideoSniff').classList.contains('active'),
+        fetchHook: document.getElementById('toggleFetchHook').classList.contains('active'),
+        minFileSize: document.getElementById('minFileSize').value,
+        excludeDomains: document.getElementById('excludeDomains').value
+      };
+      chrome.storage.local.set({ wenquSettings: settings }, () => {
+        alert('设置已保存');
+      });
+    }
+  </script>
+</body>
+</html>

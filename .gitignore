@@ -1,0 +1,17 @@
+node_modules/
+dist/
+__parts__/
+*.wqp
+.parts/
+userData/
+tasks.json
+test-*
+test_*
+verify-*
+check-tasks*
+_*.py
+_*.js
+download-page.html
+renderer/
+main.js
+*.vbs
