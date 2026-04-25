@@ -75,11 +75,13 @@ echo     OK（浏览器重启后生效）
 
 :: ===== 6. 桌面快捷方式 =====
 echo [6/8] 创建桌面快捷方式...
-powershell -Command "$ws=New-Object -ComObject WScript.Shell; $s=$ws.CreateShortcut([Environment]::GetFolderPath('Desktop')+'\WenQuDownloader.lnk'); $s.TargetPath='%INSTALL_DIR%\start.bat'; $s.WorkingDirectory='%INSTALL_DIR%'; $s.Description='问渠下载器'; $s.Save()"
+:: 默认用vbs无黑框启动
+powershell -Command "$ws=New-Object -ComObject WScript.Shell; $s=$ws.CreateShortcut([Environment]::GetFolderPath('Desktop')+'\WenQuDownloader.lnk'); $s.TargetPath='wscript.exe'; $s.Arguments='""%INSTALL_DIR%\start.vbs""'; $s.WorkingDirectory='%INSTALL_DIR%'; $s.Description='问渠下载器'; $s.Save()"
 echo     OK
 
 :: ===== 7. 开机自启 =====
 echo [7/8] 配置开机自启...
+:: 使用vbs静默启动，无黑框
 powershell -Command "$ws=New-Object -ComObject WScript.Shell; $s=$ws.CreateShortcut([Environment]::GetFolderPath('Startup')+'\WenQuDownloader.lnk'); $s.TargetPath='wscript.exe'; $s.Arguments='""%INSTALL_DIR%\start.vbs""'; $s.WindowStyle=7; $s.Save()"
 echo     OK
 
