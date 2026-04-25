@@ -1,6 +1,6 @@
 {
   "name": "wenqu-downloader",
-  "version": "3.0.0",
+  "version": "3.0.4",
   "description": "问渠下载器 - 专业多线程下载工具（轻量版）",
   "main": "server.js",
   "author": "问渠百科",
