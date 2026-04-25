@@ -38,6 +38,13 @@
     .plan ul li { padding: 4px 0; }
     .footer { text-align: center; color: #666; margin-top: 40px; padding-top: 20px; border-top: 1px solid #333; }
     .footer a { color: #00d4ff; text-decoration: none; }
+    .faq { background: #1a1a1a; border-radius: 12px; padding: 30px; margin: 30px 0; }
+    .faq-item { margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 16px; }
+    .faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .faq-q { color: #e0e0e0; font-weight: 600; margin-bottom: 8px; font-size: 0.95em; }
+    .faq-a { color: #999; font-size: 0.88em; line-height: 1.6; }
+    .faq-a code { background: #333; padding: 1px 6px; border-radius: 4px; font-size: 0.9em; }
+    .faq-a a { color: #00d4ff; }
   </style>
 </head>
 <body>
@@ -137,6 +144,69 @@
           <li>✅ 永久免费升级</li>
           <li>✅ 优先技术支持</li>
         </ul>
+      </div>
+    </div>
+
+    <div class="pricing">
+      <div class="plan">
+        <h3>免费版</h3>
+        <div class="price">¥0</div>
+        <ul>
+          <li>✅ 单线程下载</li>
+          <li>✅ 断点续传</li>
+          <li>✅ 30天试用全功能</li>
+        </ul>
+      </div>
+      <div class="plan recommended">
+        <h3>专业版</h3>
+        <div class="price">¥29.9<small>/年</small></div>
+        <ul>
+          <li>✅ 32线程加速</li>
+          <li>✅ 视频嗅探</li>
+          <li>✅ m3u8/HLS下载</li>
+          <li>✅ 下载队列</li>
+        </ul>
+      </div>
+      <div class="plan">
+        <h3>终身版</h3>
+        <div class="price">¥59.9</div>
+        <ul>
+          <li>✅ 专业版全部功能</li>
+          <li>✅ 永久免费升级</li>
+          <li>✅ 优先技术支持</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="faq">
+      <h2 style="color:#00d4ff;margin-bottom:20px;text-align:center">常见问题</h2>
+      <div class="faq-item">
+        <div class="faq-q">❓ 安装后浏览器扩展无法拦截下载？</div>
+        <div class="faq-a">确认已启用「开发者模式」，且加载的是 <code>resources\extension</code> 文件夹（不是根目录）。加载成功后在扩展栏会看到 🦞 图标。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">❓ 下载卡在 99% 不动？</div>
+        <div class="faq-a">部分服务器对单IP并发连接数有限制（如QQ服务器），下载器会自动检测并降线程，稍等即可完成合并。也可以手动降低线程数（管理界面 → 设置 → 默认线程数改为8）。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">❓ 如何解锁专业版 / 终身版？</div>
+        <div class="faq-a">打开管理界面 <a href="http://127.0.0.1:15889" style="color:#00d4ff">http://127.0.0.1:15889</a> → 点击右下角「🔑 激活」→ 扫码支付 → 联系客服获取激活码。客服微信：a龙虾，电话：180-8048-8989</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">❓ 重启电脑后下载器需要手动启动吗？</div>
+        <div class="faq-a">不需要。运行 install.bat 安装后已写入开机自启动，重启自动运行。托盘图标绿色表示运行中。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">❓ 想更新到新版本怎么办？</div>
+        <div class="faq-a">重新下载新版本 ZIP，解压覆盖原目录，重新运行 install.bat。用户数据和授权记录保存在 %APPDATA% 中，不受影响。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">❓ 支持 Mac / Linux 吗？</div>
+        <div class="faq-a">目前仅支持 Windows。Mac 版本开发中。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">❓ 与 IDM/迅雷有什么区别？</div>
+        <div class="faq-a">问渠下载器零广告零捆绑，体积仅32MB，无内核驱动安全稳定。支持视频嗅探和 m3u8/HLS 流媒体下载。适合技术用户和需要干净工具的人。</div>
       </div>
     </div>
 
